@@ -10,43 +10,21 @@
 public class Solution {
     public ListNode addTwoNumbers(ListNode L1, ListNode L2) {
         int flag = 0;
+        int sum = 0;
         ListNode l1 = L1;
         ListNode l2 = L2;
         ListNode listNode = new ListNode(0);
         listNode.next = null;
         ListNode ptr = listNode;
-        while(l1 != null && l2 != null) {
-            ListNode l = new ListNode((l1.val + l2.val + flag)%10);
+        while(l1 != null || l2 != null || flag > 0) {
+            sum = (l1 != null ? l1.val : 0) + (l2 != null ? l2.val : 0) + flag;
+            ListNode l = new ListNode(sum % 10);
             l.next = null;
             ptr.next = l;
             ptr = ptr.next;
-            flag = (l1.val + l2.val + flag)/10;
-            l1 = l1.next;
-            l2 = l2.next;
-        }
-        if(l1 != null) {
-            while (l1 != null) {
-                ListNode l = new ListNode((l1.val + flag)%10);
-                l.next = null;
-                ptr.next = l;
-                ptr = ptr.next;
-                flag = (l1.val + flag)/10;
-                l1 = l1.next;
-            }
-        }else if(l2 != null) {
-            while (l2 != null) {
-                ListNode l = new ListNode((l2.val + flag)%10);
-                l.next = null;
-                ptr.next = l;
-                ptr = ptr.next;
-                flag = (l2.val + flag)/10;
-                l2 = l2.next;
-            }
-        }
-        if(flag > 0) {
-            ListNode l = new ListNode(flag);
-            l.next = null;
-            ptr.next = l;
+            flag = sum / 10;
+            l1 = l1!=null?l1.next:null;
+            l2 = l2!=null?l2.next:null;
         }
         listNode = listNode.next;
         return listNode;
