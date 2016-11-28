@@ -17,17 +17,18 @@ public class Solution {
             after = "";
             for(int j=1; j<before.length(); j++) {
                 if(before.charAt(j) != temp) {
-                    after += count*10+(temp - '0');
+                    after += count + temp;
                     temp = before.charAt(j);
                     count = 1;
                 } else
                     count++;
 
             }
-            after += count*10+(temp - '0');
+            after += count + temp;
             before = after;
         }
         return after;
+
     }
 
     public static void main(String[] args) {
